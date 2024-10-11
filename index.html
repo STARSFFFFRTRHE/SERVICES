@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Plateforme de Services LAN</title>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur notre plateforme de services LAN</h1>
+        <nav>
+            <ul>
+                <li><a href="#member-space">Espace Membre</a></li>
+                <li><a href="#auth-form">Connexion</a></li>
+                <li><a href="#info">À Propos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div id="member-space" class="member-space">
+                <h2>Espace Membre</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Contact</th>
+                            <th>Filière</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SAKA</td>
+                            <td>Matinou</td>
+                            <td>+22990280733</td>
+                            <td>IIM</td>
+                        </tr>
+                        <tr>
+                            <td>FATOMBI</td>
+                            <td>Olivier</td>
+                            <td>+22952965966</td>
+                            <td>SSRI</td>
+                        </tr>
+                        <tr>
+                            <td>AMADOU</td>
+                            <td>Yazid</td>
+                            <td>+22951959605</td>
+                            <td>SIL</td>
+                        </tr>
+                        <tr>
+                            <td>OGBANKOTAN</td>
+                            <td>Placide</td>
+                            <td>+22953916556</td>
+                            <td>SIL</td>
+                        </tr>
+                        <!-- Ajoutez d'autres membres ici -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="slideshow">
+                <div class="slide">
+                    <img src=" A.jpg" alt="Image 1" />
+                    <div class="caption">Services de mise en réseau de haute qualité</div>
+                </div>
+                <div class="slide">
+                    <img src="B.jpg" alt="Image 2" />
+                    <div class="caption">Solutions LAN adaptées à vos besoins</div>
+                </div>
+                <div class="slide">
+                    <img src="R.jpg" alt="Image 3" />
+                    <div class="caption">Assistance technique professionnelle</div>
+                </div>
+            </div>
+        </div>
+        <section id="auth-form" class="auth-form">
+            <h2>Authentification</h2>
+            <form action="login.php" method="POST">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Se connecter</button>
+            </form>
+        </section>
+        <section id="info">
+            <h2>À Propos de Nos Services</h2>
+            <p>Nous offrons une large gamme de services pour la mise en place et la gestion de réseaux LAN sans fil. Que vous soyez une petite entreprise ou une grande organisation, nous avons des solutions adaptées pour vous.</p>
+            <div class="icons">
+                <div class="icon">
+                    <i class="fas fa-network-wired"></i>
+                    <p>Configuration Réseau</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-shield"></i>
+                    <p>Sécurité Réseau</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-tools"></i>
+                    <p>Maintenance Technique</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Plateforme de Services LAN</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

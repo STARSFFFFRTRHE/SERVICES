@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul de réseau</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #resultats, #resultatsIP {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* CSS pour la section cachée */
+        .hidden {
+            display: none;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .toggle-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        // Fonction pour afficher/masquer le second formulaire
+        function toggleForm() {
+            let form = document.getElementById("secondForm");
+            if (form.classList.contains("hidden")) {
+                form.classList.remove("hidden");
+            } else {
+                form.classList.add("hidden");
+            }
+        }
+
+        // Fonction pour déterminer la classe à partir du masque réseau
+        function obtenirClasseMasque(masque) {
+            let masqueParts = masque.split('.').map(Number);
+
+            if (masqueParts[0] === 255 && masqueParts[1] !== 255) {
+                return 'Classe A';
+            } else if (masqueParts[0] === 255 && masqueParts[1] === 255 && masqueParts[2] !== 255) {
+                return 'Classe B';
+            } else if (masqueParts[0] === 255 && masqueParts[1] === 255 && masqueParts[2] === 255 && masqueParts[3] !== 255) {
+                return 'Classe C';
+            } else {
+                return 'Classe D ou E';
+            }
+        }
+
+        // Fonction pour obtenir la classe d'une adresse IP
+        function obtenirClasseIP(ip) {
+            let premierOctet = parseInt(ip.split('.')[0]);
+
+            if (premierOctet >= 1 && premierOctet <= 126) {
+                return 'Classe A';
+            } else if (premierOctet >= 128 && premierOctet <= 191) {
+                return 'Classe B';
+            } else if (premierOctet >= 192 && premierOctet <= 223) {
+                return 'Classe C';
+            } else if (premierOctet >= 224 && premierOctet <= 239) {
+                return 'Classe D (Multicast)';
+            } else if (premierOctet >= 240 && premierOctet <= 255) {
+                return 'Classe E (Réservée)';
+            } else {
+                return 'Adresse IP non valide';
+            }
+        }
+
+        // Fonction pour calculer l'adresse réseau et l'adresse de diffusion
+        function calculerAdresseReseauEtDiffusion(ip, subnet) {
+            let ipParts = ip.split('.').map(Number);
+            let subnetParts = subnet.split('.').map(Number);
+
+            let adresseReseau = [];
+            let adresseDiffusion = [];
+
+            for (let i = 0; i < 4; i++) {
+                adresseReseau[i] = ipParts[i] & subnetParts[i];
+                adresseDiffusion[i] = adresseReseau[i] | (~subnetParts[i] & 255);
+            }
+
+            return {
+                reseau: adresseReseau.join('.'),
+                diffusion: adresseDiffusion.join('.')
+            };
+        }
+
+        // Fonction pour calculer les adresses IP utilisables
+        function adressesUtilisables(adresseReseau, adresseDiffusion, machines) {
+            let adressesPossibles = [];
+            let ipDebut = ipToLong(adresseReseau) + 1;
+            let ipFin = ipToLong(adresseDiffusion) - 1;
+
+            for (let i = ipDebut; i <= ipDebut + machines - 1 && i <= ipFin; i++) {
+                adressesPossibles.push(longToIp(i));
+            }
+
+            return adressesPossibles;
+        }
+
+        // Convertir une adresse IP en entier (long)
+        function ipToLong(ip) {
+            let ipParts = ip.split('.').map(Number);
+            return ((ipParts[0] << 24) >>> 0) + (ipParts[1] << 16) + (ipParts[2] << 8) + ipParts[3];
+        }
+
+        // Convertir un entier (long) en adresse IP
+        function longToIp(long) {
+            return [
+                (long >>> 24) & 255,
+                (long >>> 16) & 255,
+                (long >>> 8) & 255,
+                long & 255
+            ].join('.');
+        }
+
+        // Fonction pour afficher les résultats du premier formulaire (Classe du masque)
+        function calculerClasseMasque() {
+            let subnet = document.getElementById("subnet").value;
+
+            // Obtenir la classe du masque réseau
+            let classe = obtenirClasseMasque(subnet);
+            document.getElementById("classe").innerText = "Classe de réseau : " + classe;
+
+            return false; // Empêcher la soumission du formulaire
+        }
+
+        // Fonction pour afficher les résultats du second formulaire (Classe IP et calculs réseau)
+        function calculerIP() {
+            let ip = document.getElementById("ip").value;
+            let subnet = document.getElementById("subnetIP").value;
+            let machines = document.getElementById("machines").value;
+
+            // Obtenir la classe de l'adresse IP
+            let classe = obtenirClasseIP(ip);
+            document.getElementById("classeIP").innerText = "Classe IP : " + classe;
+
+            // Calculer les adresses réseau et de diffusion
+            let adresses = calculerAdresseReseauEtDiffusion(ip, subnet);
+            document.getElementById("reseau").innerText = "Adresse Réseau : " + adresses.reseau;
+            document.getElementById("diffusion").innerText = "Adresse de Diffusion : " + adresses.diffusion;
+
+            // Calculer les adresses utilisables
+            let adressesPossibles = adressesUtilisables(adresses.reseau, adresses.diffusion, parseInt(machines));
+            let adressesHTML = "";
+            adressesPossibles.forEach(adresse => {
+                adressesHTML += "<li>" + adresse + "</li>";
+            });
+            document.getElementById("adresses").innerHTML = adressesHTML;
+
+            return false; // Empêcher la soumission du formulaire
+        }
+    </script>
+</head>
+<body>
+    <h1>Calcul de réseau</h1>
+
+    <!-- Premier formulaire pour déterminer la classe à partir du masque -->
+    <form onsubmit="return calculerClasseMasque()">
+        <label for="subnet">Entrez le masque réseau :</label>
+        <input type="text" id="subnet" name="subnet" placeholder="ex: 255.255.255.0" required>
+        <br>
+        <input type="submit" value="Déterminer la classe">
+    </form>
+
+    <div id="resultats">
+        <h2>Résultats</h2>
+        <p id="classe">Classe de réseau :</p>
+    </div>
+
+    <!-- Bouton pour afficher/masquer le second formulaire -->
+    <button class="toggle-button" onclick="toggleForm()">➤ Options supplémentaires</button>
+
+    <!-- Second formulaire caché par défaut -->
+    <div id="secondForm" class="hidden">
+        <form onsubmit="return calculerIP()">
+            <label for="ip">Entrez l'adresse IP :</label>
+            <input type="text" id="ip" name="ip" placeholder="ex: 192.168.1.1" required>
+            <br>
+
+            <label for="subnetIP">Masque de sous-réseau :</label>
+            <input type="text" id="subnetIP" name="subnetIP" placeholder="ex: 255.255.255.0" required>
+            <br>
+
+            <label for="machines">Nombre de machines :</label>
+            <input type="number" id="machines" name="machines" min="1" required>
+            <br>
+
+            <input type="submit" value="Calculer">
+        </form>
+
+        <div id="resultatsIP">
+            <h2>Résultats</h2>
+            <p id="classeIP">Classe IP :</p>
+            <p id="reseau">Adresse Réseau :</p>
+            <p id="diffusion">Adresse de Diffusion :</p>
+            <h3>Adresses utilisables :</h3>
+            <ul id="adresses"></ul>
+        </div>
+    </div>
+</body>
+</html>
