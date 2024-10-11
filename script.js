@@ -32,8 +32,12 @@ document.querySelector('.auth-form form').addEventListener('submit', function(ev
 
     if (user) {
         alert("Connexion réussie !");
-        // Rediriger vers une page avec les informations de l'utilisateur
-        window.location.href = "user_dashboard.html"; // Remplacez par le nom de votre page
+        // Stocker le nom de l'utilisateur dans le localStorage
+        localStorage.setItem('userFirstName', user.name.split(' ')[0]);
+        localStorage.setItem('userLastName', user.name.split(' ')[1]);
+    
+        // Rediriger vers la page du tableau de bord
+        window.location.href = "user_dashboard.html";
     } else {
         alert("Nom d'utilisateur ou mot de passe incorrect.");
     }
