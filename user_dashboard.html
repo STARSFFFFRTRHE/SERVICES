@@ -31,27 +31,36 @@
     </footer>
 
     <script>
-        // Simuler une connexion utilisateur
-        const user = {
-            firstName: "Yazid", // Remplacez par le prénom réel de l'utilisateur
-            lastName: "AMADOU"   // Remplacez par le nom réel de l'utilisateur
-        };
-
-        document.getElementById('user-fullname').textContent = `${user.firstName} ${user.lastName}`;
-        document.getElementById('user-name').textContent = user.firstName;
-
+        // Récupérer les informations de l'utilisateur depuis le localStorage
+        const firstName = localStorage.getItem('userFirstName');
+        const lastName = localStorage.getItem('userLastName');
+    
+        if (firstName && lastName) {
+            // Afficher les informations sur le tableau de bord
+            document.getElementById('user-fullname').textContent = `${firstName} ${lastName}`;
+            document.getElementById('user-name').textContent = firstName;
+        } else {
+            // Si aucune information n'est disponible, rediriger vers la page de connexion
+            alert("Aucune information utilisateur disponible. Veuillez vous reconnecter.");
+            window.location.href = "index.html";
+        }
+    
+        // Déconnexion
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Effacer les informations de l'utilisateur du localStorage
+            localStorage.removeItem('userFirstName');
+            localStorage.removeItem('userLastName');
+    
+            alert("Déconnexion réussie !");
+            window.location.href = "index.html";
+        });
+    
         // Redirection vers une autre page lors du clic sur le bouton
         document.getElementById('go-to-page').addEventListener('click', function() {
             window.location.href = "cg.html"; // Remplacez par l'URL de la page souhaitée
         });
-
-        // Déconnexion (peut être amélioré pour gérer l'état de session)
-        document.getElementById('logout').addEventListener('click', function(event) {
-            event.preventDefault();
-            // Ici, vous pouvez ajouter une logique pour gérer la déconnexion, par exemple en supprimant les cookies ou le stockage local
-            alert("Déconnexion réussie !");
-            window.location.href = "index.html"; // Rediriger vers la page d'accueil après déconnexion
-        });
     </script>
+    
 </body>
 </html>
