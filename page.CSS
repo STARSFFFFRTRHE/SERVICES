@@ -1,0 +1,567 @@
+/* Reset des marges et des paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* En-tête */
+.header-title {
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: #007BFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar nav ul li {
+    position: relative;
+    margin-left: 20px;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar nav ul li a:hover {
+    background-color: #FFDD40;
+    color: #007BFF;
+}
+
+.navbar nav ul li ul {
+    display: none;
+    position: absolute;
+    background-color: #007BFF;
+    padding: 10px 0;
+    list-style: none;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.navbar nav ul li:hover ul {
+    display: block;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons a {
+    margin-left: 20px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('network-background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5); /* Overlay effect */
+    margin: auto;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.hero .btn {
+    background-color: #FFDD40;
+    padding: 10px 30px;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.hero .btn:hover {
+    background-color: #FFC700;
+    transform: scale(1.05);
+}
+
+/* Services Section */
+#services {
+    background-color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#services h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #007BFF;
+    text-transform: uppercase;
+}
+
+.service-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.service {
+    width: 30%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 10px; /* Added margin for spacing */
+}
+
+.service:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.service h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #007BFF;
+}
+
+.service p {
+    font-size: 16px;
+}
+
+/* Section Solutions */
+#solutions {
+    background-color: #007BFF;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#solutions h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#solutions p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Grille de solutions */
+.solution-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Carte de solution */
+.solution-card {
+    background-color: #0056b3;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.solution-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.solution-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.solution-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.solution-card p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+/* Section Téléchargements */
+#downloads {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#downloads h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#drop-area {
+    border: 2px dashed #007BFF;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#drop-area.hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-color: #0056b3;
+}
+
+#drop-area p {
+    margin: 0;
+    font-size: 18px;
+    color: #555;
+}
+
+#fileElem {
+    display: none;
+}
+
+label {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+label:hover {
+    background-color: #0056b3;
+}
+
+#file-list {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#file-list p {
+    margin: 5px 0;
+    color: #007BFF;
+}
+
+/* Section Outils de LAN */
+#tools {
+    background-color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.tools-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Section Membres */
+#members {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#members h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #007BFF;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Section Nos Constats */
+#constats {
+    background-color: #f0f8ff; /* Couleur de fond douce */
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#constats h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #007BFF; /* Couleur du titre */
+}
+
+#constats p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Grille de constats */
+.constat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Carte de constat */
+.constat-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.constat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.constat-icon {
+    font-size: 40px;
+    color: #007BFF; /* Couleur de l'icône */
+    margin-bottom: 15px;
+}
+
+.constat-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.constat-card p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Pied de page */
+footer {
+    background-color: #007BFF; /* Couleur de fond du footer */
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-info,
+.footer-links,
+.footer-social {
+    flex: 1;
+    margin: 10px;
+}
+
+.footer-info h3,
+.footer-links h3,
+.footer-social h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin: 8px 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFDD40; /* Couleur d'accentuation au survol */
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #FFDD40; /* Couleur d'accentuation au survol */
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 10px;
+}
+/* Section Galerie */
+#gallery {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f4f4f4; /* Couleur de fond pour la section */
+}
+
+#gallery h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #007BFF;
+}
+
+/* Conteneur de la galerie */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; /* Espace entre les images */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Élément de la galerie */
+.gallery-item {
+    position: relative;
+    overflow: hidden; /* Pour masquer les débordements */
+    border-radius: 10px; /* Coins arrondis */
+    transition: transform 0.3s ease; /* Effet de transition */
+}
+
+.gallery-item img {
+    width: 100%; /* S'assurer que l'image occupe 100% de la largeur */
+    height: auto; /* Garder le ratio d'aspect */
+    border-radius: 10px; /* Coins arrondis des images */
+}
+
+/* Effet de survol */
+.gallery-item:hover {
+    transform: scale(1.05); /* Agrandir légèrement l'image au survol */
+}
+/* Authentification Section */
+.auth-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+    margin-top: 20px; /* Ajoute de l'espace entre la section héro et d'authentification */
+}
+
+.auth-section .container {
+    max-width: 400px;
+    margin: 0 auto; /* Centre le conteneur */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #007BFF;
+}
+
+.auth-section .form-group {
+    margin-bottom: 15px;
+}
+
+.auth-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.auth-section input[type="text"],
+.auth-section input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.auth-section input[type="text"]:focus,
+.auth-section input[type="password"]:focus {
+    border-color: #007BFF; /* Changement de couleur lors du focus */
+}
+
+.auth-section button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-section button:hover {
+    background-color: #0056b3;
+}
